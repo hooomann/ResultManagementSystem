@@ -1,0 +1,147 @@
+  <h2>Student Results</h2>
+
+  <div class="button-container">
+    <button class="add-button" (click)="openAddModal()">Add Student</button>
+    <button class="logout-button" (click)="logout()">Logout</button>
+    <span *ngIf="showAddMessage" class="message">{{ addStudentMessage }}</span>
+    <span *ngIf="showEditMessage" class="message">{{ editStudentMessage }}</span>
+    <span *ngIf="showDeleteMessage" class="message">{{ deleteStudentMessage }}</span>
+  </div>
+
+  <table class="student-table">
+    <thead>
+      <tr>
+        <th>Roll No</th>
+        <th>Student Name</th>
+        <th>Date of Birth</th>
+        <th>Score</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let student of students">
+        <td>{{ student.rollno }}</td>
+        <td>{{ student.name }}</td>
+        <td>{{ student.dateofbirth }}</td>
+        <td>{{ student.score }}</td>
+        <td>
+          <div class="action-buttons">
+            <button class="edit-button" (click)="openEditModal(student)">
+              Edit
+            </button>
+            <button class="delete-button" (click)="deleteStudent(student)">
+              Delete
+            </button>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="modal" [ngClass]="{ 'modal-open': showAddModal }">
+    <div class="modal-dialog" *ngIf="showAddModal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3 class="modal-title">Add Student</h3>
+        </div>
+        <div class="modal-body">
+          <form (ngSubmit)="addStudent()">
+            <div>
+              <label for="rollNo">Roll No:</label>
+              <input
+                type="text"
+                id="rollNo"
+                [(ngModel)]="newStudent.rollno"
+                name="rollNo"
+                required
+              />
+            </div>
+            <div>
+              <label for="name">Name:</label>
+              <input
+                type="text"
+                id="name"
+                [(ngModel)]="newStudent.name"
+                name="name"
+                required
+              />
+            </div>
+            <div>
+              <label for="dateOfBirth">Date of Birth:</label>
+              <input
+                type="text"
+                id="dateOfBirth"
+                [(ngModel)]="newStudent.dateofbirth"
+                name="dateOfBirth"
+                placeholder="dd-mm-yyyy"
+                required
+              />
+            </div>
+            <div>
+              <label for="score">Score:</label>
+              <input
+                type="text"
+                id="score"
+                [(ngModel)]="newStudent.score"
+                name="score"
+                required
+              />
+            </div>
+            <button type="submit">Add Student</button>
+            <button class="close-button" (click)="closeAddModal()">Cancel</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="showEditModal" class="modal modal-open">
+    <div class="modal-dialog modal-content">
+      <h3 class="modal-title">Edit Student</h3>
+      <form>
+        <div>
+          <label for="rollno">Roll No:</label>
+          <input
+            type="text"
+            id="rollno"
+            [(ngModel)]="editedStudent.rollno"
+            name="rollno"
+            disabled
+          />
+        </div>
+        <div>
+          <label for="name">Name:</label>
+          <input
+            type="text"
+            id="name"
+            [(ngModel)]="editedStudent.name"
+            name="name"
+            required
+          />
+        </div>
+        <div>
+          <label for="score">Score:</label>
+          <input
+            type="number"
+            id="score"
+            [(ngModel)]="editedStudent.score"
+            name="score"
+            required
+          />
+        </div>
+        <div>
+          <label for="dateOfBirth">Date of Birth:</label>
+          <input
+            type="text"
+            id="dateOfBirth"
+            [(ngModel)]="editedStudent.dateofbirth"
+            name="dateOfBirth"
+            placeholder="dd-mm-yyyy"
+            required
+          />
+        </div>
+        <button (click)="saveEditedStudent()">Save</button>
+        <button class="close-button" (click)="closeEditModal()">Cancel</button>
+      </form>
+    </div>
+  </div>

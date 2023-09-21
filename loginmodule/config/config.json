@@ -1,0 +1,9 @@
+{
+  "development": {
+    "username": "admin",
+    "password": "12345678",
+    "database": "bookstore",
+    "host": "database-1.cfv4eqrdw98w.eu-north-1.rds.amazonaws.com",
+    "dialect": "mysql"
+  }
+}

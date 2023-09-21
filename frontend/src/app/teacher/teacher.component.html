@@ -1,0 +1,18 @@
+<div class="teacher-login-container">
+  <h2>Teacher Login</h2>
+  <form class="teacher-login-form" (ngSubmit)="login()">
+    <div>
+      <label for="id">ID:</label>
+      <input type="text" id="id" name="id" [(ngModel)]="id" required>
+    </div>
+    <div>
+      <label for="password">Password:</label>
+      <input type="password" id="password" name="password" [(ngModel)]="password" required>
+    </div>
+    <div>
+      <button class="login-button" type="submit">Login</button>
+      <button class="back-button" (click)="goBack()">Back</button>
+    </div>
+    <div *ngIf="loginError" class="error-message">{{ loginError }}</div>
+  </form>
+</div>
